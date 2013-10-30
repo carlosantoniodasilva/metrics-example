@@ -1,0 +1,11 @@
+'pt-BR':
+  activerecord:
+    models:
+      customer:
+        one: Cliente
+        other: Clientes
+    attributes:
+      customer:
+        cpf_cnpj: CPF/CNPJ
+        name: Nome
+        active: Ativo?

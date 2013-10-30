@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  cpf_cnpj: MyString
+  name: MyString
+  active: MyString
+
+two:
+  cpf_cnpj: MyString
+  name: MyString
+  active: MyString

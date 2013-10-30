@@ -15,24 +15,26 @@
 </head>
 <body>
   <div class="navbar navbar-inverse navbar-fixed-top">
-    <div class="container">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+    <div class="navbar-inner">
+      <div class="container">
+        <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="#">Métricas</a>
-      </div>
-      <div class="collapse navbar-collapse">
-        <ul class="nav navbar-nav">
-          <li class="active"><%= link_to 'Home', root_path %></li>
-        </ul>
+        <a class="brand" href="#">Métricas</a>
+        <div class="nav-collapse collapse">
+          <ul class="nav">
+            <%= nav_item 'Home', root_path %>
+            <%= nav_item 'Clientes', customers_path %>
+          </ul>
+        </div>
       </div>
     </div>
   </div>
 
   <div class="container">
+    <%= flash_messages %>
     <%= yield %>
   </div>
 

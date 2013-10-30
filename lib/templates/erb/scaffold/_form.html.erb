@@ -8,6 +8,6 @@
   </div>
 
   <div class="form-actions">
-    <%%= f.button :submit %>
+    <%%= f.button :submit %> ou <%%= link_to 'cancelar', <%= plural_table_name %>_path, :class => 'cancel' %>
   </div>
 <%% end %>

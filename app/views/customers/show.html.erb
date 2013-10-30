@@ -1,0 +1,11 @@
+<%= buttons_page_header 'Cliente: ' << @customer.name do %>
+  <%= glyph_button_to 'pencil', 'Editar', edit_customer_path(@customer) %>
+  <%= glyph_button_to 'trash', 'Remover', @customer, method: :delete, data: { confirm: 'Tem certeza?' } %>
+  <%= glyph_button_to 'chevron-left', 'Voltar', customers_path %>
+<% end %>
+
+<%= show_for @customer do |s| %>
+  <%= s.attribute :cpf_cnpj %>
+  <%= s.attribute :name %>
+  <%= s.attribute :active %>
+<% end %>

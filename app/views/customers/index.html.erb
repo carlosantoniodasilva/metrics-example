@@ -1,0 +1,26 @@
+<%= buttons_page_header 'Listando clientes' do %>
+  <%= glyph_button_to :plus, 'Adicionar novo cliente', new_customer_path %>
+<% end %>
+
+<table class="table table-striped">
+  <tr>
+    <% [:cpf_cnpj, :name, :active].each do |attribute| -%>
+      <th><%= Customer.human_attribute_name(attribute) %></th>
+    <% end -%>
+    <th class="span2"></th>
+  </tr>
+
+<% @customers.each do |customer| %>
+  <%= content_tag_for :tr, customer do %>
+    <td><%= customer.cpf_cnpj %></td>
+    <td><%= customer.name %></td>
+    <td><%= boolean_label customer.active %></td>
+    <td class="actions">
+      <%= link_to glyphicon(:pencil), edit_customer_path(customer), title: "Editar" %>
+      <%= link_to glyphicon(:trash), customer_path(customer), data: { confirm: 'Tem certeza?' }, method: :delete, title: "Remover" %>
+    </td>
+  <% end %>
+<% end %>
+</table>
+
+<%# <%= will_paginate @customers %1> %>
