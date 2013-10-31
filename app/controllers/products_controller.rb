@@ -2,7 +2,7 @@ class ProductsController < ApplicationController
   before_action :set_product, only: [:show, :edit, :update, :destroy]
 
   def index
-    @products = Product.order(:name)
+    @products = Product.where("name like '%#{params[:name]}%'").order(:name)
   end
 
   def show
