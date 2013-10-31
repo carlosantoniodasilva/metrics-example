@@ -9,12 +9,8 @@ class Order < ActiveRecord::Base
   scope :completed, -> { where completed: true }
 
   def total
-    sum = 0
-
-    items.each do |item|
-      sum += item.total
+    items.inject(0) do |sum, item|
+      sum + item.total
     end
-
-    sum
   end
 end
