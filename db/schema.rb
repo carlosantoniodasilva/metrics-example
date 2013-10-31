@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131031115425) do
+ActiveRecord::Schema.define(version: 20131031121458) do
 
   create_table "customers", force: true do |t|
     t.string   "cpf_cnpj",   limit: 14
@@ -20,6 +20,18 @@ ActiveRecord::Schema.define(version: 20131031115425) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "order_items", force: true do |t|
+    t.integer  "order_id"
+    t.integer  "product_id"
+    t.decimal  "value"
+    t.integer  "quantity",   default: 1
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "order_items", ["order_id"], name: "index_order_items_on_order_id"
+  add_index "order_items", ["product_id"], name: "index_order_items_on_product_id"
 
   create_table "orders", force: true do |t|
     t.integer  "customer_id"

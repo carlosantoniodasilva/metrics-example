@@ -1,11 +1,12 @@
 class OrdersController < ApplicationController
-  before_action :set_order, only: [:show, :edit, :update, :destroy]
+  before_action :set_open_order, only: [:edit, :update, :destroy]
 
   def index
-    @orders = Order.includes(:customer).order('id desc')
+    @orders = Order.includes(:customer, :items).order('id desc')
   end
 
   def show
+    @order = Order.find(params[:id])
   end
 
   def new
@@ -39,11 +40,11 @@ class OrdersController < ApplicationController
   end
 
   private
-    def set_order
-      @order = Order.find(params[:id])
+    def set_open_order
+      @order = Order.open.find(params[:id])
     end
 
     def order_params
-      params.require(:order).permit(:customer_id, :comments)
+      params.require(:order).permit(:customer_id, :comments, :completed)
     end
 end

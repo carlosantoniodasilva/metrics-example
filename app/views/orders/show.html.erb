@@ -1,11 +1,56 @@
 <%= buttons_page_header Order.model_name.human << ': ' << @order.id.to_s do %>
-  <%= glyph_button_to 'pencil', 'Editar', edit_order_path(@order) %>
-  <%= glyph_button_to 'trash', 'Remover', @order, method: :delete, data: { confirm: 'Tem certeza?' } %>
+  <% unless @order.completed? %>
+    <%= glyph_button_to 'pencil', 'Editar', edit_order_path(@order) %>
+    <%= glyph_button_to 'trash', 'Remover', @order, method: :delete, data: { confirm: 'Tem certeza?' } %>
+  <% end %>
   <%= glyph_button_to 'chevron-left', 'Voltar', orders_path %>
 <% end %>
+
+<div class="pull-right">
+  <span class="label label-important">Total: <%= number_to_currency @order.total %></span>
+  <% unless @order.completed? %>
+    <%= simple_form_for @order do |f| %>
+      <%= f.input :completed, as: :hidden, input_html: { value: true } %>
+      <%= f.button :submit, 'Finalizar Pedido', class: 'btn-danger', data: { confirm: 'Confirma finalizar pedido?' } %>
+    <% end %>
+  <% end %>
+</div>
 
 <%= show_for @order do |s| %>
   <%= s.association :customer %>
   <%= s.attribute :comments %>
   <%= s.attribute :completed %>
 <% end %>
+
+<hr>
+
+<% unless @order.completed? %>
+  <div class="pull-right">
+    <%= glyph_button_to :plus, 'Adicionar ' << OrderItem.model_name.human, new_order_item_path(@order) %>
+  </div>
+<% end %>
+<h3>Itens</h3>
+
+<table class="table table-striped">
+  <tr>
+    <% [:product, :value, :quantity, :total].each do |attribute| -%>
+      <th><%= OrderItem.human_attribute_name(attribute) %></th>
+    <% end -%>
+    <% unless @order.completed? %>
+      <th class="span2"></th>
+    <% end %>
+  </tr>
+
+  <%= content_tag_for :tr, @order.items do |item| %>
+    <td><%= item.product.name %></td>
+    <td><%= number_to_currency item.value %></td>
+    <td><%= item.quantity %></td>
+    <td><%= number_to_currency item.total %></td>
+    <% unless @order.completed? %>
+      <td class="actions">
+        <%= link_to glyphicon('pencil'), edit_order_item_path(@order, item), title: "Editar" %>
+        <%= link_to glyphicon('trash'), order_item_path(@order, item), data: { confirm: 'Tem certeza?' }, method: :delete, title: "Remover" %>
+      </td>
+    <% end %>
+  <% end %>
+</table>

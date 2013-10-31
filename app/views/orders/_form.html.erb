@@ -4,6 +4,7 @@
   <div class="form-inputs">
     <%= f.association :customer, collection: Customer.active.order(:name) %>
     <%= f.input :comments %>
+    <%= f.input :completed if @order.persisted? %>
   </div>
 
   <div class="form-actions">

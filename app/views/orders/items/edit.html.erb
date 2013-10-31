@@ -1,0 +1,5 @@
+<%= buttons_page_header 'Alterar item no pedido: ' << @order.id.to_s do %>
+  <%= glyph_button_to 'chevron-left', 'Voltar', @order %>
+<% end %>
+
+<%= render 'form' %>

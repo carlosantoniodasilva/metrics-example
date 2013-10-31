@@ -7,6 +7,9 @@
       order:
         one: Pedido
         other: Pedidos
+      order_item:
+        one: Item
+        other: Itens
       product:
         one: Produto
         other: Produtos
@@ -19,6 +22,12 @@
         customer: Cliente
         comments: Observações
         completed: Finalizada
+        total: Total
+      item:
+        product: Produto
+        value: Valor
+        quantity: Quantidade
+        total: Total
       product:
         name: Nome
         value: Valor
