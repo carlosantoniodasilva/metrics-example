@@ -16,8 +16,9 @@
     <td><%= customer.name %></td>
     <td><%= boolean_label customer.active %></td>
     <td class="actions">
-      <%= link_to glyphicon(:pencil), edit_customer_path(customer), title: "Editar" %>
-      <%= link_to glyphicon(:trash), customer_path(customer), data: { confirm: 'Tem certeza?' }, method: :delete, title: "Remover" %>
+      <%= link_to glyphicon('eye-open'), customer, title: "Visualizar" %>
+      <%= link_to glyphicon('pencil'), edit_customer_path(customer), title: "Editar" %>
+      <%= link_to glyphicon('trash'), customer, data: { confirm: 'Tem certeza?' }, method: :delete, title: "Remover" %>
     </td>
   <% end %>
 <% end %>

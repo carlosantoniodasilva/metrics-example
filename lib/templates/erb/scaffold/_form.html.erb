@@ -1,4 +1,4 @@
-<%%= simple_form_for(@<%= singular_table_name %>) do |f| %>
+<%%= simple_form_for(@<%= singular_name %>) do |f| %>
   <%%= f.error_notification %>
 
   <div class="form-inputs">
@@ -8,6 +8,6 @@
   </div>
 
   <div class="form-actions">
-    <%%= f.button :submit %> ou <%%= link_to 'cancelar', <%= plural_table_name %>_path, :class => 'cancel' %>
+    <%%= f.button :submit %> ou <%%= link_to 'cancelar', <%= plural_name %>_path, :class => 'cancel' %>
   </div>
 <%% end %>

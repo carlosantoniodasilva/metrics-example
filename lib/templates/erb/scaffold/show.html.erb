@@ -1,8 +1,11 @@
+<%%= buttons_page_header <%= class_name %>.model_name.human << ': ' << @<%= singular_name %>.name do %>
+  <%%= glyph_button_to 'pencil', 'Editar', edit_<%= singular_name %>_path(@<%= singular_name %>) %>
+  <%%= glyph_button_to 'trash', 'Remover', @<%= singular_name %>, method: :delete, data: { confirm: 'Tem certeza?' } %>
+  <%%= glyph_button_to 'chevron-left', 'Voltar', <%= plural_name %>_path %>
+<%% end %>
+
 <%%= show_for @<%= singular_name %> do |s| %>
 <% attributes.each do |attribute| -%>
   <%%= s.<%= attribute.reference? ? :association : :attribute %> :<%= attribute.name %> %>
 <% end -%>
 <%% end %>
-
-<%%= link_to 'Edit', edit_<%= singular_name %>_path(@<%= singular_name %>) %> |
-<%%= link_to 'Back', <%= plural_name %>_path %>

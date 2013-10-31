@@ -1,4 +1,4 @@
-<%= buttons_page_header 'Novo cliente' do %>
+<%= buttons_page_header 'Novo ' << Customer.model_name.human do %>
   <%= glyph_button_to 'chevron-left', 'Voltar', customers_path %>
 <% end %>
 

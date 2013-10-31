@@ -1,3 +1,5 @@
-<%% title 'Adicionar ' << <%= class_name %>.model_name.human %>
+<%%= buttons_page_header 'Novo ' << <%= class_name %>.model_name.human do %>
+  <%%= glyph_button_to 'chevron-left', 'Voltar', <%= plural_name %>_path %>
+<%% end %>
 
 <%%= render 'form' %>
