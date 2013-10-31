@@ -1,5 +1,5 @@
-<%= buttons_page_header 'Listando clientes' do %>
-  <%= glyph_button_to :plus, 'Adicionar novo cliente', new_customer_path %>
+<%= buttons_page_header 'Listando ' << Customer.model_name.human(count: 2) do %>
+  <%= glyph_button_to :plus, 'Adicionar ' << Customer.model_name.human, new_customer_path %>
 <% end %>
 
 <table class="table table-striped">
