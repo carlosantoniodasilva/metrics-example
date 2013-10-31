@@ -35,6 +35,10 @@ class Order < ActiveRecord::Base
       raise StandardError.new(self)
     end
 
+    if options[:source_type] && source_reflection.options[:polymorphic].nil?
+      raise StandardError.new(active_record.name, self, source_reflection)
+    end
+
     check_validity_of_inverse!
   end
 end
