@@ -9,6 +9,12 @@ class Order < ActiveRecord::Base
   scope :completed, -> { where completed: true }
 
   def total
-    items.to_a.sum(&:total)
+    sum = 0
+
+    items.each do |item|
+      sum += item.value * item.quantity
+    end
+
+    sum
   end
 end
