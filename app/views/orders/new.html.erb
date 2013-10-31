@@ -1,0 +1,5 @@
+<%= buttons_page_header 'Novo ' << Order.model_name.human do %>
+  <%= glyph_button_to 'chevron-left', 'Voltar', orders_path %>
+<% end %>
+
+<%= render 'form' %>

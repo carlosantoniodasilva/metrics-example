@@ -4,6 +4,9 @@
       customer:
         one: Cliente
         other: Clientes
+      order:
+        one: Pedido
+        other: Pedidos
       product:
         one: Produto
         other: Produtos
@@ -12,6 +15,10 @@
         cpf_cnpj: CPF/CNPJ
         name: Nome
         active: Ativo?
+      order:
+        customer: Cliente
+        comments: Observações
+        completed: Finalizada
       product:
         name: Nome
         value: Valor

@@ -1,0 +1,25 @@
+<%= buttons_page_header 'Listando ' << Order.model_name.human(count: 2) do %>
+  <%= glyph_button_to :plus, 'Adicionar ' << Order.model_name.human, new_order_path %>
+<% end %>
+
+<table class="table table-striped">
+  <tr>
+    <% [:id, :customer, :completed].each do |attribute| -%>
+      <th><%= Order.human_attribute_name(attribute) %></th>
+    <% end -%>
+    <th class="span2"></th>
+  </tr>
+
+  <%= content_tag_for :tr, @orders do |order| %>
+    <td><%= order.id %></td>
+    <td><%= order.customer.name %></td>
+    <td><%= boolean_label order.completed? %></td>
+    <td class="actions">
+      <%= link_to glyphicon('eye-open'), order, title: "Visualizar" %>
+      <%= link_to glyphicon('pencil'), edit_order_path(order), title: "Editar" %>
+      <%= link_to glyphicon('trash'), order, data: { confirm: 'Tem certeza?' }, method: :delete, title: "Remover" %>
+    </td>
+  <% end %>
+</table>
+
+<%# <%= will_paginate @orders %1> %>
