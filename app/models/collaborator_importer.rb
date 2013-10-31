@@ -49,26 +49,20 @@ class CollaboratorImporter
       lines = @file.tempfile.read
       lines.force_encoding("iso8859-1") if lines.respond_to?(:force_encoding)
       lines.each_line do |line|
-        process_line(line) if valid_line?(line)
+        if line.present? && line.chomp =~ LINE_FORMAT
+          company_id, collaborator_id, *collaborator_name = line.split
+          company      = find_company(company_id) or (add_company_not_found_warning(company_id) and return)
+          collaborator = find_collaborator(company, collaborator_id)
+
+          update_totals(collaborator)
+          collaborator_name = convert_collaborator_name(collaborator_name.join(' '))
+
+          collaborator.update_attributes(:name => collaborator_name)
+        end
       end
 
       true
     end
-  end
-
-  def valid_line?(line)
-    line.present? && line.chomp =~ LINE_FORMAT
-  end
-
-  def process_line(line)
-    company_id, collaborator_id, *collaborator_name = line.split
-    company      = find_company(company_id) or (add_company_not_found_warning(company_id) and return)
-    collaborator = find_collaborator(company, collaborator_id)
-
-    update_totals(collaborator)
-    collaborator_name = convert_collaborator_name(collaborator_name.join(' '))
-
-    collaborator.update_attributes(:name => collaborator_name)
   end
 
   def convert_collaborator_name(collaborator_name)
