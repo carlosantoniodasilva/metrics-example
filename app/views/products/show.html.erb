@@ -6,6 +6,8 @@
 
 <%= show_for @product do |s| %>
   <%= s.attribute :name %>
-  <%= s.attribute :value %>
+  <%= s.attribute :value do %>
+    <%= number_to_currency @product.value %>
+  <% end %>
   <%= s.attribute :active %>
 <% end %>

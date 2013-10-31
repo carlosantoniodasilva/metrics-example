@@ -12,7 +12,7 @@
 
   <%= content_tag_for :tr, @products do |product| %>
     <td><%= product.name %></td>
-    <td><%= product.value %></td>
+    <td><%= number_to_currency product.value %></td>
     <td><%= boolean_label product.active %></td>
     <td class="actions">
       <%= link_to glyphicon('eye-open'), product, title: "Visualizar" %>
