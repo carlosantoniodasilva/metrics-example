@@ -30,7 +30,7 @@ class CollaboratorImporter
   def initialize(attributes={})
     @file      = attributes[:file] if attributes
     @companies = {}
-    reset_totals
+    @total_created = @total_updated = 0
   end
 
   def require_uploaded_file
@@ -52,10 +52,14 @@ class CollaboratorImporter
         if line.present? && line.chomp =~ LINE_FORMAT
           company_id, collaborator_id, *collaborator_name = line.split
           company      = find_company(company_id) or (add_company_not_found_warning(company_id) and return)
-          collaborator = find_collaborator(company, collaborator_id)
+          collaborator = company.collaborators.find_or_initialize_by_questor_id(collaborator_id)
 
-          update_totals(collaborator)
-          collaborator_name = convert_collaborator_name(collaborator_name.join(' '))
+          if collaborator.persisted?
+            @total_updated += 1
+          else
+            @total_created += 1
+          end
+          collaborator_name = collaborator_name.join(' ').encode('utf-8')
 
           collaborator.update_attributes(:name => collaborator_name)
         end
@@ -65,28 +69,8 @@ class CollaboratorImporter
     end
   end
 
-  def convert_collaborator_name(collaborator_name)
-    collaborator_name.encode('utf-8')
-  end
-
   def find_company(id)
     @companies[id] ||= Company.find_by_questor_id(id)
-  end
-
-  def find_collaborator(company, id)
-    company.collaborators.find_or_initialize_by_questor_id(id)
-  end
-
-  def reset_totals
-    @total_created = @total_updated = 0
-  end
-
-  def update_totals(collaborator)
-    if collaborator.persisted?
-      @total_updated += 1
-    else
-      @total_created += 1
-    end
   end
 
   def add_company_not_found_warning(company_id)
