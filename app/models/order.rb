@@ -12,7 +12,7 @@ class Order < ActiveRecord::Base
     sum = 0
 
     items.each do |item|
-      sum += item.value * item.quantity
+      sum += item.total
     end
 
     sum
