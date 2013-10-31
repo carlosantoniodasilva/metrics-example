@@ -12,4 +12,16 @@ class Triangulo
       'Escaleno'
     end
   end
+
+  def self.validar2(a, b, c)
+    if (a + b < c) || (a + c < b) || (b + c < a)
+      'Invalido'
+    elsif (a == b) && (b == c)
+      'Equilatero'
+    elsif (a == b) || (b == c) || (a == c)
+      'Isosceles'
+    else
+      'Escaleno'
+    end
+  end
 end
