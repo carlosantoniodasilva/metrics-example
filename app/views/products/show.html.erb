@@ -1,0 +1,11 @@
+<%= buttons_page_header Product.model_name.human << ': ' << @product.name do %>
+  <%= glyph_button_to 'pencil', 'Editar', edit_product_path(@product) %>
+  <%= glyph_button_to 'trash', 'Remover', @product, method: :delete, data: { confirm: 'Tem certeza?' } %>
+  <%= glyph_button_to 'chevron-left', 'Voltar', products_path %>
+<% end %>
+
+<%= show_for @product do |s| %>
+  <%= s.attribute :name %>
+  <%= s.attribute :value %>
+  <%= s.attribute :active %>
+<% end %>

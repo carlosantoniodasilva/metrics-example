@@ -11,12 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131030110444) do
+ActiveRecord::Schema.define(version: 20131031114153) do
 
   create_table "customers", force: true do |t|
     t.string   "cpf_cnpj",   limit: 14
     t.string   "name"
     t.boolean  "active",                default: true
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "products", force: true do |t|
+    t.string   "name"
+    t.decimal  "value"
+    t.boolean  "active",     default: true
     t.datetime "created_at"
     t.datetime "updated_at"
   end

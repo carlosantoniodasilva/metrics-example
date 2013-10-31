@@ -4,8 +4,15 @@
       customer:
         one: Cliente
         other: Clientes
+      product:
+        one: Produto
+        other: Produtos
     attributes:
       customer:
         cpf_cnpj: CPF/CNPJ
         name: Nome
+        active: Ativo?
+      product:
+        name: Nome
+        value: Valor
         active: Ativo?

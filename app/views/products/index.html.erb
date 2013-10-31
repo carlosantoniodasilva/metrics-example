@@ -1,0 +1,25 @@
+<%= buttons_page_header 'Listando ' << Product.model_name.human(count: 2) do %>
+  <%= glyph_button_to :plus, 'Adicionar ' << Product.model_name.human, new_product_path %>
+<% end %>
+
+<table class="table table-striped">
+  <tr>
+    <% [:name, :value, :active].each do |attribute| -%>
+      <th><%= Product.human_attribute_name(attribute) %></th>
+    <% end -%>
+    <th class="span2"></th>
+  </tr>
+
+  <%= content_tag_for :tr, @products do |product| %>
+    <td><%= product.name %></td>
+    <td><%= product.value %></td>
+    <td><%= boolean_label product.active %></td>
+    <td class="actions">
+      <%= link_to glyphicon('eye-open'), product, title: "Visualizar" %>
+      <%= link_to glyphicon('pencil'), edit_product_path(product), title: "Editar" %>
+      <%= link_to glyphicon('trash'), product, data: { confirm: 'Tem certeza?' }, method: :delete, title: "Remover" %>
+    </td>
+  <% end %>
+</table>
+
+<%# <%= will_paginate @products %1> %>

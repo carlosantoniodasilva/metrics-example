@@ -1,0 +1,5 @@
+<%= buttons_page_header 'Alterar ' << Product.model_name.human do %>
+  <%= glyph_button_to 'chevron-left', 'Voltar', products_path %>
+<% end %>
+
+<%= render 'form' %>
